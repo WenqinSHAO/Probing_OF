@@ -5,20 +5,20 @@ where the path performance toward destination networks is measured via multiple 
 
 ## File description
 - The network topology used in the demon is built with [mininet](http://mininet.org) using the *new_start.py* script, where,
--- *new_start.py* sets the interface IP address on hosts according to *IPCONFIG* and *PBR_TABLE*. 
+  -*new_start.py* sets the interface IP address on hosts according to *IPCONFIG* and *PBR_TABLE*. 
 More specifically, in *PBR_TABLE*, for each private IP source address used in probing, its transit next-hop and its type is given.
 There are two types:
---- PIP, for Provider IP, indicates that the traffic with this source IP should be NATed, when crossing the border, with provider interco IP so that returning traffic comes in via the same transit provider.
---- CIP, for customer IP, indicates that the traffic with this source IP should be NATed with the provider independant IP of the local multiple-homed network, so that the returning traffic follows the same path as its normal data traffic in BGP routing.
--- *ROUTE* describes the default route needed on mininet hostes and is as well loaded by *new_start.py*.
+    - PIP, for Provider IP, indicates that the traffic with this source IP should be NATed, when crossing the border, with provider interco IP so that returning traffic comes in via the same transit provider.
+    - CIP, for customer IP, indicates that the traffic with this source IP should be NATed with the provider independant IP of the local multiple-homed network, so that the returning traffic follows the same path as its normal data traffic in BGP routing.
+  - *ROUTE* describes the default route needed on mininet hostes and is as well loaded by *new_start.py*.
 - The OpenFlow controller in this demo bases on [Ryu](https://osrg.github.io/ryu/). 
 The construction of OpenFlow pipeline is realised in *probing.py*. 
--- *probing.py* learns the network location, in format of dpid:port\_no, of each next hop in *NEXT_HOP*.
--- It learns as well the NAT and PBR (Policy Based Routing) tasks need to be performed in *PBR_TABLE*.
--- The OpenFlow switches are not aware of traditional networking stacks, yet hosts do, so do other hosts over the Internet. 
+  - *probing.py* learns the network location, in format of dpid:port\_no, of each next hop in *NEXT_HOP*.
+  - It learns as well the NAT and PBR (Policy Based Routing) tasks need to be performed in *PBR_TABLE*.
+  - The OpenFlow switches are not aware of traditional networking stacks, yet hosts do, so do other hosts over the Internet. 
 Therefore the OpenFlow controller have to bridge the difference by reading:
---- *VIR_IP* virtual IPs and MAC addresses meant to be assigned to OpenFlow switches;
---- *VIR_IP_INTF* the mapping relationship between virtual IP and OpenFlow switch interfaces. 
+    - *VIR_IP* virtual IPs and MAC addresses meant to be assigned to OpenFlow switches;
+    - *VIR_IP_INTF* the mapping relationship between virtual IP and OpenFlow switch interfaces. 
 *gw* and *nat* are virtual interfaces instead of physical switch interfaces. 
 They can be actually associated to arbitrary and multiple switch interfaces as long as local security policies not violated.
 - *probing_mn_topo.png* illustrates the demo settings.
