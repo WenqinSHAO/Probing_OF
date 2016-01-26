@@ -8,8 +8,8 @@ where the path performance toward destination networks is measured via multiple 
   - *new_start.py* sets the interface IP address on hosts according to *IPCONFIG* and *PBR_TABLE*. 
 More specifically, in *PBR_TABLE*, for each private IP source address used in probing, its transit next-hop and its type is given.
 There are two types:
-    * PIP, for Provider IP, indicates that the traffic with this source IP should be NATed, when crossing the border, with provider interco IP so that returning traffic comes in via the same transit provider.
-    * CIP, for customer IP, indicates that the traffic with this source IP should be NATed with the provider independant IP of the local multiple-homed network, so that the returning traffic follows the same path as its normal data traffic in BGP routing.
+    1. PIP, for Provider IP, indicates that the traffic with this source IP should be NATed, when crossing the border, with provider interco IP so that returning traffic comes in via the same transit provider.
+    2. CIP, for customer IP, indicates that the traffic with this source IP should be NATed with the provider independant IP of the local multiple-homed network, so that the returning traffic follows the same path as its normal data traffic in BGP routing.
   - *ROUTE* describes the default route needed on mininet hostes and is as well loaded by *new_start.py*.
 - The OpenFlow controller in this demo bases on [Ryu](https://osrg.github.io/ryu/). 
 The construction of OpenFlow pipeline is realised in *probing.py*. 
